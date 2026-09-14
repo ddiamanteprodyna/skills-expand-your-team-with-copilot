@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryFilters = document.querySelectorAll(".category-filter");
   const dayFilters = document.querySelectorAll(".day-filter");
   const timeFilters = document.querySelectorAll(".time-filter");
+  const themeToggleButton = document.getElementById("theme-toggle");
 
   // Authentication elements
   const loginButton = document.getElementById("login-button");
@@ -50,6 +51,27 @@ document.addEventListener("DOMContentLoaded", () => {
     afternoon: { start: "15:00", end: "18:00" }, // After school hours
     weekend: { days: ["Saturday", "Sunday"] }, // Weekend days
   };
+
+  function updateThemeButtonLabel() {
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    themeToggleButton.textContent = isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+  }
+
+  function applyTheme(theme) {
+    document.body.classList.toggle("dark-mode", theme === "dark");
+    localStorage.setItem("theme", theme);
+    updateThemeButtonLabel();
+  }
+
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      applyTheme("dark");
+      return;
+    }
+
+    applyTheme("light");
+  }
 
   // Initialize filters from active elements
   function initializeFilters() {
@@ -235,6 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event listeners for authentication
+  themeToggleButton.addEventListener("click", () => {
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    applyTheme(isDarkMode ? "light" : "dark");
+  });
+
   loginButton.addEventListener("click", openLoginModal);
   logoutButton.addEventListener("click", logout);
   closeLoginModal.addEventListener("click", closeLoginModalHandler);
@@ -862,6 +889,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize app
+  initializeTheme();
   checkAuthentication();
   initializeFilters();
   fetchActivities();
