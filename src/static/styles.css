@@ -190,6 +190,48 @@ section h3 {
   justify-content: center;
 }
 
+.social-share {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.share-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.share-button {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background-color: var(--background);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-button:hover {
+  background-color: var(--border-light);
+}
+
+.share-native {
+  background-color: var(--primary);
+  color: var(--primary-text);
+  border-color: var(--primary);
+}
+
+.share-native:hover {
+  background-color: var(--primary-light);
+}
+
 /* Activity Tag */
 .activity-tag {
   position: absolute;
